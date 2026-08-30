@@ -3,7 +3,7 @@
    ========================================================= */
 
 const countdown = document.getElementById("countdown");
-const revealDate = new Date("September 8, 2026 00:00:00").getTime();
+const revealDate = new Date("August 1, 2026 00:00:00").getTime();
 
 function updateCountdown() {
     if (!countdown) return;
