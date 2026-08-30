@@ -1906,7 +1906,59 @@ footer p {
   gap: 24px;
 }
 
+/* =========================================================
+   ARTIST SOCIAL LINKS
+   ========================================================= */
 
+.artist-socials,
+.artist-modal-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.artist-socials a,
+.artist-modal-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 14px;
+
+    color: #fff;
+
+    background: rgba(255,255,255,.05);
+
+    border: 1px solid rgba(212,175,55,.55);
+
+    text-decoration: none;
+
+    font-size: .65rem;
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+}
+
+.artist-socials a:hover,
+.artist-modal-links a:hover {
+    color: var(--black);
+
+    background: var(--gold);
+
+    border-color: var(--gold);
+
+    transform: translateY(-2px);
+}
 /* =========================================================
    CARD CONTAINER
    ========================================================= */
@@ -3160,7 +3212,20 @@ footer p {
   }
 }
 
+@media (max-width: 768px) {
 
+    .artist-socials,
+    .artist-modal-links {
+        gap: 8px;
+    }
+
+    .artist-socials a,
+    .artist-modal-links a {
+        padding: 8px 12px;
+        font-size: .6rem;
+    }
+
+}
 /* =========================================================
    VERY SMALL PHONES
    ========================================================= */
