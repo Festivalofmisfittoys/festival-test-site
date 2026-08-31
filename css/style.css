@@ -3735,4 +3735,29 @@ body.modal-open {
 .nav-inner > .nav-logo {
   display: none !important;
 }
+/* =========================================================
+   ARTIST CARD INTERACTION FIX
+   ========================================================= */
 
+.artist-card-front,
+.artist-card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.artist-card-back {
+    z-index: 2;
+    pointer-events: auto;
+}
+
+.artist-card-back .learn-more-btn,
+.artist-card-back .artist-socials,
+.artist-card-back .artist-socials a {
+    position: relative;
+    z-index: 50;
+    pointer-events: auto;
+}
+
+.artist-card-back .learn-more-btn {
+    cursor: pointer;
+}
