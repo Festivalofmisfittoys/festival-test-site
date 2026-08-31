@@ -435,15 +435,13 @@ document.addEventListener(
                 "[data-close-modal]"
             );
 
-   
+
         /* =====================================================
            REVEAL
            ===================================================== */
 
         if (lineupIsRevealed()) {
-
             revealArtists();
-
         }
 
 
@@ -457,14 +455,20 @@ document.addEventListener(
                 "click",
                 function (event) {
 
+                    /*
+                     * Do NOT flip the card when clicking
+                     * Learn More or a social link.
+                     */
+
                     if (
                         event.target.closest(
                             ".learn-more-btn"
+                        ) ||
+                        event.target.closest(
+                            ".artist-socials a"
                         )
                     ) {
-
                         return;
-
                     }
 
 
@@ -517,103 +521,166 @@ document.addEventListener(
         });
 
 
-/* =====================================================
-   LEARN MORE
-   ===================================================== */
+        /* =====================================================
+           LEARN MORE
+           
+           EVENT DELEGATION
+           
+           IMPORTANT:
+           The Learn More buttons are populated by
+           revealArtists(), so we listen at the document level.
+           ===================================================== */
 
-document.addEventListener(
-    "click",
-    function (event) {
+        document.addEventListener(
+            "click",
+            function (event) {
 
-        const button =
-            event.target.closest(".learn-more-btn");
+                const button =
+                    event.target.closest(
+                        ".learn-more-btn"
+                    );
 
-        if (!button) return;
+                if (!button) {
+                    return;
+                }
 
-        event.preventDefault();
-        event.stopPropagation();
+                event.preventDefault();
+                event.stopPropagation();
 
-        if (!modal) return;
 
-        const artistNumber =
-            button.dataset.artist || "";
+                if (!modal) {
+                    return;
+                }
 
-        const data =
-            bandData.find(
-                band =>
-                    band.id === artistNumber
-            );
 
-        if (
-            !data ||
-            !lineupIsRevealed()
-        ) {
-            return;
-        }
+                const artistNumber =
+                    button.dataset.artist || "";
 
-        /* Modal content */
 
-        if (modalKicker) {
-            modalKicker.textContent =
-                "FESTIVAL ARTIST";
-        }
+                const data =
+                    bandData.find(
+                        band =>
+                            band.id ===
+                            artistNumber
+                    );
 
-        if (modalTitle) {
-            modalTitle.textContent =
-                data.name;
-        }
 
-        if (modalBio) {
-            modalBio.textContent =
-                data.bio;
-        }
+                if (!data) {
+                    return;
+                }
 
-        if (modalLinks) {
-            modalLinks.innerHTML =
-                buildSocialLinks(data);
-        }
 
-        if (modalImage) {
+                if (!lineupIsRevealed()) {
+                    return;
+                }
 
-            modalImage.classList.remove(
-                "mystery-image"
-            );
 
-            modalImage.style.backgroundImage =
-                `url("${data.image}")`;
+                /* =================================================
+                   MODAL CONTENT
+                   ================================================= */
 
-            modalImage.style.backgroundSize =
-                "contain";
+                if (modalKicker) {
 
-            modalImage.style.backgroundPosition =
-                "center";
+                    modalKicker.textContent =
+                        "FESTIVAL ARTIST";
 
-            modalImage.style.backgroundRepeat =
-                "no-repeat";
+                }
 
-            const mysterySpan =
-                modalImage.querySelector("span");
 
-            if (mysterySpan) {
-                mysterySpan.style.display =
-                    "none";
-            }
-        }
+                if (modalTitle) {
 
-        /* Open modal */
+                    modalTitle.textContent =
+                        data.name;
 
-        modal.classList.add("is-open");
+                }
 
-        modal.setAttribute(
-            "aria-hidden",
-            "false"
+
+                if (modalBio) {
+
+                    modalBio.textContent =
+                        data.bio;
+
+                }
+
+
+                /* =================================================
+                   SOCIAL LINKS
+                   ================================================= */
+
+                if (modalLinks) {
+
+                    modalLinks.innerHTML =
+                        buildSocialLinks(data);
+
+                }
+
+
+                /* =================================================
+                   ARTIST IMAGE
+                   ================================================= */
+
+                if (modalImage) {
+
+                    modalImage.classList.remove(
+                        "mystery-image"
+                    );
+
+
+                    modalImage.style.backgroundImage =
+                        `url("${data.image}")`;
+
+
+                    modalImage.style.backgroundSize =
+                        "contain";
+
+
+                    modalImage.style.backgroundPosition =
+                        "center";
+
+
+                    modalImage.style.backgroundRepeat =
+                        "no-repeat";
+
+
+                    const mysterySpan =
+                        modalImage.querySelector(
+                            "span"
+                        );
+
+
+                    if (mysterySpan) {
+
+                        mysterySpan.style.display =
+                            "none";
+
+                    }
+
+                }
+
+
+                /* =================================================
+                   OPEN MODAL
+                   ================================================= */
+
+                modal.classList.add(
+                    "is-open"
+                );
+
+
+                modal.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+
+                document.body.classList.add(
+                    "modal-open"
+                );
+
+            },
+            true
         );
 
-        document.body.classList.add(
-            "modal-open"
-        );
-    }
-);
 
         /* =====================================================
            CLOSE MODAL
@@ -621,17 +688,21 @@ document.addEventListener(
 
         function closeModal() {
 
-            if (!modal) return;
+            if (!modal) {
+                return;
+            }
 
 
             modal.classList.remove(
                 "is-open"
             );
 
+
             modal.setAttribute(
                 "aria-hidden",
                 "true"
             );
+
 
             document.body.classList.remove(
                 "modal-open"
@@ -652,6 +723,10 @@ document.addEventListener(
         );
 
 
+        /* =====================================================
+           ESCAPE KEY
+           ===================================================== */
+
         document.addEventListener(
             "keydown",
             function (event) {
@@ -669,7 +744,6 @@ document.addEventListener(
 
     }
 );
-
 
 /* =========================================================
    HAMBURGER NAVIGATION
