@@ -522,131 +522,103 @@ document.addEventListener(
         });
 
 
-        /* =====================================================
-           LEARN MORE
-           ===================================================== */
+/* =====================================================
+   LEARN MORE
+   ===================================================== */
 
-        learnMoreButtons.forEach(
-            function (button) {
+document.addEventListener(
+    "click",
+    function (event) {
 
-                button.addEventListener(
-                    "click",
-                    function (event) {
+        const button =
+            event.target.closest(".learn-more-btn");
 
-                        event.stopPropagation();
+        if (!button) return;
 
+        event.preventDefault();
+        event.stopPropagation();
 
-                        if (!modal) return;
+        if (!modal) return;
 
+        const artistNumber =
+            button.dataset.artist || "";
 
-                        const artistNumber =
-                            button.dataset.artist || "";
+        const data =
+            bandData.find(
+                band =>
+                    band.id === artistNumber
+            );
 
+        if (
+            !data ||
+            !lineupIsRevealed()
+        ) {
+            return;
+        }
 
-                        const data =
-                            bandData.find(
-                                band =>
-                                    band.id ===
-                                    artistNumber
-                            );
+        /* Modal content */
 
+        if (modalKicker) {
+            modalKicker.textContent =
+                "FESTIVAL ARTIST";
+        }
 
-                        if (
-                            !data ||
-                            !lineupIsRevealed()
-                        ) {
+        if (modalTitle) {
+            modalTitle.textContent =
+                data.name;
+        }
 
-                            return;
+        if (modalBio) {
+            modalBio.textContent =
+                data.bio;
+        }
 
-                        }
+        if (modalLinks) {
+            modalLinks.innerHTML =
+                buildSocialLinks(data);
+        }
 
+        if (modalImage) {
 
-                        /* Modal content */
+            modalImage.classList.remove(
+                "mystery-image"
+            );
 
-                        if (modalKicker) {
+            modalImage.style.backgroundImage =
+                `url("${data.image}")`;
 
-                            modalKicker.textContent =
-                                "FESTIVAL ARTIST";
+            modalImage.style.backgroundSize =
+                "contain";
 
-                        }
+            modalImage.style.backgroundPosition =
+                "center";
 
+            modalImage.style.backgroundRepeat =
+                "no-repeat";
 
-                        if (modalTitle) {
+            const mysterySpan =
+                modalImage.querySelector("span");
 
-                            modalTitle.textContent =
-                                data.name;
-
-                        }
-
-
-                        if (modalBio) {
-
-                            modalBio.textContent =
-                                data.bio;
-
-                        }
-
-
-                        if (modalLinks) {
-
-                            modalLinks.innerHTML =
-                                buildSocialLinks(data);
-
-                        }
-
-
-                        if (modalImage) {
-
-                            modalImage.classList.remove(
-                                "mystery-image"
-                            );
-
-                            modalImage.style.backgroundImage =
-                                `url("${data.image}")`;
-
-                            modalImage.style.backgroundSize =
-                                "contain";
-
-                            modalImage.style.backgroundPosition =
-                                "center";
-
-
-                            const mysterySpan =
-                                modalImage.querySelector(
-                                    "span"
-                                );
-
-                            if (mysterySpan) {
-
-                                mysterySpan.style.display =
-                                    "none";
-
-                            }
-
-                        }
-
-
-                        /* Open modal */
-
-                        modal.classList.add(
-                            "is-open"
-                        );
-
-                        modal.setAttribute(
-                            "aria-hidden",
-                            "false"
-                        );
-
-                        document.body.classList.add(
-                            "modal-open"
-                        );
-
-                    }
-                );
-
+            if (mysterySpan) {
+                mysterySpan.style.display =
+                    "none";
             }
+        }
+
+        /* Open modal */
+
+        modal.classList.add("is-open");
+
+        modal.setAttribute(
+            "aria-hidden",
+            "false"
         );
 
+        document.body.classList.add(
+            "modal-open"
+        );
+    }
+);
 
         /* =====================================================
            CLOSE MODAL
