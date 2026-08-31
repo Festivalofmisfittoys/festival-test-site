@@ -2440,194 +2440,29 @@ footer p {
 
 
 /* =========================================================
-   BIO MODAL
+   ARTIST MODAL IMAGE
    ========================================================= */
 
-.artist-modal {
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 9999;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  padding: 25px;
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  pointer-events: none;
-
-  transition:
-    opacity .25s ease,
-    visibility .25s ease;
-}
-
-.artist-modal.is-open {
-  opacity: 1;
-
-  visibility: visible;
-
-  pointer-events: auto;
-}
-
-.artist-modal-overlay {
-  position: absolute;
-
-  inset: 0;
-
-  background: rgba(0,0,0,.86);
-
-  backdrop-filter: blur(8px);
-}
-
-.artist-modal-content {
-  position: relative;
-
-  z-index: 2;
-
-  width: min(760px,100%);
-
-  max-height: 90vh;
-
-  overflow-y: auto;
-
-  background:
-    linear-gradient(
-      145deg,
-      #181818,
-      #050505
-    );
-
-  border: 1px solid rgba(212,175,55,.4);
-
-  border-top: 4px solid var(--red);
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.75);
-}
-
 .artist-modal-image {
-  height: 300px;
+    width: 100%;
+    height: 360px;
 
-  display: flex;
+    min-height: 360px;
 
-  align-items: center;
-  justify-content: center;
-}
+    background-color: #050505;
 
-.artist-modal-image span {
-  color: rgba(255,255,255,.9);
+    background-repeat: no-repeat;
 
-  font-family:
-    Impact,
-    Haettenschweiler,
-    "Arial Narrow Bold",
-    sans-serif;
+    background-position: center;
 
-  font-size: 8rem;
+    background-size: contain;
 
-  text-shadow:
-    5px 5px 0 var(--red-dark);
-}
+    border: 1px solid rgba(212,175,55,.35);
 
-.artist-modal-body {
-  padding: 35px;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.55);
 
-  text-align: center;
-}
-
-.artist-modal-kicker {
-  color: var(--gold);
-
-  font-size: .58rem;
-
-  font-weight: 900;
-
-  letter-spacing: 3px;
-}
-
-.artist-modal-body h2 {
-  margin: 10px 0 18px;
-
-  color: var(--white);
-
-  font-family:
-    Impact,
-    Haettenschweiler,
-    "Arial Narrow Bold",
-    sans-serif;
-
-  font-size: clamp(2rem,5vw,3.5rem);
-
-  letter-spacing: 2px;
-}
-
-.artist-modal-body p {
-  max-width: 600px;
-
-  margin: 0 auto;
-
-  color: rgba(255,255,255,.68);
-
-  line-height: 1.7;
-}
-
-.artist-modal-links {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  justify-content: center;
-
-  gap: 10px;
-
-  margin-top: 28px;
-}
-
-.artist-modal-links button {
-  padding: 11px 18px;
-
-  background: transparent;
-
-  border: 1px solid rgba(212,175,55,.4);
-
-  color: var(--gold);
-
-  font-size: .55rem;
-
-  font-weight: 900;
-
-  letter-spacing: 1.5px;
-}
-
-.artist-modal-close {
-  position: absolute;
-
-  top: 12px;
-  right: 15px;
-
-  z-index: 5;
-
-  width: 38px;
-  height: 38px;
-
-  border: 1px solid rgba(255,255,255,.25);
-
-  background: rgba(0,0,0,.55);
-
-  color: white;
-
-  font-size: 1.5rem;
-
-  line-height: 1;
-
-  cursor: pointer;
+    overflow: hidden;
 }
 
 
@@ -3818,7 +3653,10 @@ body.modal-open {
 
 }
 
-
+.artist-modal-image {
+    height: 260px;
+    min-height: 260px;
+}
 /* =========================================================
    VERY SMALL PHONES
    ========================================================= */
