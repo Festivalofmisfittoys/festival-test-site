@@ -2227,39 +2227,17 @@ footer p {
 
 .artist-front-info {
   flex: 1;
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
-
   padding: 15px 18px;
-}
-
-.artist-status {
-  color: var(--gold);
-
-  font-size: .55rem;
-
-  font-weight: 900;
-
-  letter-spacing: 2.5px;
 }
 
 .artist-front-info h3 {
   margin: 7px 0 0;
-
   color: var(--white);
-
-  font-family:
-    Impact,
-    Haettenschweiler,
-    "Arial Narrow Bold",
-    sans-serif;
-
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 1.35rem;
-
   letter-spacing: 1.5px;
 }
 
@@ -2356,44 +2334,40 @@ footer p {
 
 .artist-socials {
   display: flex;
-
   flex-wrap: wrap;
-
   justify-content: center;
-
+  align-items: center;
   gap: 7px;
-
-  margin-top: 25px;
+  margin-top: 20px;
 }
 
-.artist-socials button {
-  position: relative;
-
-  z-index: 10;
-
-  padding: 9px 11px;
-
-  border: 1px solid rgba(212,175,55,.35);
-
-  background: transparent;
-
-  color: var(--gold);
-
-  font-size: .52rem;
-
+.artist-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 88px;
+  padding: 8px 11px;
+  color: #fff;
+  background: linear-gradient(145deg, rgba(177,30,44,.18), rgba(5,5,5,.92));
+  border: 1px solid rgba(212,175,55,.55);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: .55rem;
   font-weight: 900;
-
-  letter-spacing: 1px;
-
-  cursor: pointer;
+  letter-spacing: 1.3px;
+  line-height: 1;
+  box-shadow: inset 0 0 12px rgba(177,30,44,.08);
+  transition: .2s ease;
 }
 
-.artist-socials button:disabled {
-  opacity: .5;
-
-  cursor: default;
+.artist-socials a:hover {
+  color: var(--black);
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(0,0,0,.4);
 }
-
 
 /* =========================================================
    LEARN MORE
@@ -2440,29 +2414,201 @@ footer p {
 
 
 /* =========================================================
-   ARTIST MODAL IMAGE
+   BIO MODAL
    ========================================================= */
 
+.artist-modal {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+}
+
+.artist-modal.is-open {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+.artist-modal-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(0,0,0,.86);
+
+  backdrop-filter: blur(8px);
+}
+
+.artist-modal-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(760px,100%);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background:
+    linear-gradient(
+      145deg,
+      #181818,
+      #050505
+    );
+
+  border: 1px solid rgba(212,175,55,.4);
+
+  border-top: 4px solid var(--red);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.75);
+}
+
 .artist-modal-image {
-    width: 100%;
-    height: 360px;
+  height: 340px;
+  min-height: 340px;
+  background-color: #050505;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  overflow: hidden;
 
-    min-height: 360px;
+  display: flex;
 
-    background-color: #050505;
+  align-items: center;
+  justify-content: center;
+}
 
-    background-repeat: no-repeat;
+.artist-modal-image span {
+  color: rgba(255,255,255,.9);
 
-    background-position: center;
+  font-family:
+    Impact,
+    Haettenschweiler,
+    "Arial Narrow Bold",
+    sans-serif;
 
-    background-size: contain;
+  font-size: 8rem;
 
-    border: 1px solid rgba(212,175,55,.35);
+  text-shadow:
+    5px 5px 0 var(--red-dark);
+}
 
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.55);
+.artist-modal-body {
+  padding: 35px;
 
-    overflow: hidden;
+  text-align: center;
+}
+
+.artist-modal-kicker {
+  color: var(--gold);
+
+  font-size: .58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 3px;
+}
+
+.artist-modal-body h2 {
+  margin: 10px 0 18px;
+
+  color: var(--white);
+
+  font-family:
+    Impact,
+    Haettenschweiler,
+    "Arial Narrow Bold",
+    sans-serif;
+
+  font-size: clamp(2rem,5vw,3.5rem);
+
+  letter-spacing: 2px;
+}
+
+.artist-modal-body p {
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  color: rgba(255,255,255,.68);
+
+  line-height: 1.7;
+}
+
+.artist-modal-links {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 28px;
+}
+
+.artist-modal-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 18px;
+  color: #fff;
+  background: linear-gradient(145deg, rgba(177,30,44,.18), rgba(5,5,5,.92));
+
+  border: 1px solid rgba(212,175,55,.4);
+
+  font-size: .55rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+}
+
+.artist-modal-close {
+  position: absolute;
+
+  top: 12px;
+  right: 15px;
+
+  z-index: 5;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(255,255,255,.25);
+
+  background: rgba(0,0,0,.55);
+
+  color: white;
+
+  font-size: 1.5rem;
+
+  line-height: 1;
+
+  cursor: pointer;
 }
 
 
@@ -2504,34 +2650,6 @@ footer p {
     animation-duration: 20s;
   }
 
-  nav {
-    display: grid;
-
-    grid-template-columns:
-      repeat(2,minmax(0,1fr));
-
-    gap: 7px;
-
-    width: 100%;
-
-    margin: 8px 0 0;
-
-    padding: 0 12px;
-  }
-
-  nav a {
-    width: 100%;
-
-    min-height: 48px;
-
-    padding: 8px 5px;
-
-    font-size: .57rem;
-
-    letter-spacing: .9px;
-
-    white-space: nowrap;
-  }
 
 
   /* HERO */
@@ -2800,11 +2918,6 @@ footer p {
     padding: 10px;
   }
 
-  .artist-status {
-    font-size: .43rem;
-
-    letter-spacing: 1.5px;
-  }
 
   .artist-front-info h3 {
     font-size: .82rem;
@@ -2834,11 +2947,6 @@ footer p {
     margin-top: 15px;
   }
 
-  .artist-socials button {
-    padding: 6px 5px;
-
-    font-size: .39rem;
-  }
 
   .learn-more-btn {
     margin-top: 14px;
@@ -3052,13 +3160,6 @@ footer p {
 
 @media (max-width:390px) {
 
-  nav a {
-    min-height: 44px;
-
-    font-size: .51rem;
-
-    letter-spacing: .6px;
-  }
 
   .hero {
     padding-left: 9px;
@@ -3653,10 +3754,7 @@ body.modal-open {
 
 }
 
-.artist-modal-image {
-    height: 260px;
-    min-height: 260px;
-}
+
 /* =========================================================
    VERY SMALL PHONES
    ========================================================= */
@@ -3731,33 +3829,73 @@ body.modal-open {
   }
 }
 
-/* Hide desktop logo */
-.nav-inner > .nav-logo {
-  display: none !important;
-}
+
+
+
 /* =========================================================
-   ARTIST CARD INTERACTION FIX
+   FINAL ARTIST INTERACTION + RESPONSIVE POLISH
    ========================================================= */
 
 .artist-card-front,
 .artist-card-back {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .artist-card-back {
-    z-index: 2;
-    pointer-events: auto;
+  z-index: 2;
 }
 
 .artist-card-back .learn-more-btn,
 .artist-card-back .artist-socials,
 .artist-card-back .artist-socials a {
-    position: relative;
-    z-index: 50;
-    pointer-events: auto;
+  position: relative;
+  z-index: 50;
+  pointer-events: auto;
 }
 
 .artist-card-back .learn-more-btn {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.artist-modal-links a:hover {
+  color: var(--black);
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .artist-socials {
+    gap: 5px;
+    margin-top: 13px;
+  }
+
+  .artist-socials a {
+    min-width: 0;
+    padding: 7px 8px;
+    font-size: .46rem;
+    letter-spacing: .9px;
+  }
+
+  .artist-modal-image {
+    height: 260px;
+    min-height: 260px;
+  }
+
+  .artist-modal-links {
+    gap: 7px;
+  }
+
+  .artist-modal-links a {
+    padding: 9px 12px;
+    font-size: .5rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .artist-modal-image {
+    height: 230px;
+    min-height: 230px;
+  }
 }
