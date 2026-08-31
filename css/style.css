@@ -1616,6 +1616,15 @@ header {
 }
 
 
+then **remove every ` ``` ` from the CSS file.**
+
+Your CSS should look like normal CSS, with no backticks.
+
+### Then I'd make the vendor centering more bulletproof
+
+Replace your vendor section CSS with this clean version:
+
+```css
 /* =========================================================
    VENDORS
    ========================================================= */
@@ -1901,62 +1910,54 @@ footer p {
    ARTIST SOCIAL LINKS
    ========================================================= */
 
-/* =========================================================
-   DYNAMIC ARTIST SOCIAL LINKS
-   ========================================================= */
-
-.artist-socials {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  margin-top: 25px;
+.artist-socials,
+.artist-modal-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
 }
 
 .artist-socials a,
 .artist-modal-links a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  min-width: 92px;
-  padding: 9px 13px;
+    padding: 9px 14px;
 
-  color: #fff;
-  background: rgba(0,0,0,.55);
+    color: #fff;
 
-  border: 1px solid rgba(212,175,55,.5);
+    background: rgba(255,255,255,.05);
 
-  text-decoration: none;
-  text-transform: uppercase;
+    border: 1px solid rgba(212,175,55,.55);
 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .58rem;
-  font-weight: 900;
-  letter-spacing: 1.4px;
-  line-height: 1;
+    text-decoration: none;
 
-  box-shadow: inset 0 0 12px rgba(177,30,44,.08);
+    font-size: .65rem;
+    font-weight: 900;
 
-  transition:
-    color .2s ease,
-    background .2s ease,
-    border-color .2s ease,
-    transform .2s ease,
-    box-shadow .2s ease;
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
 }
 
 .artist-socials a:hover,
 .artist-modal-links a:hover {
-  color: var(--black);
-  background: var(--gold);
-  border-color: var(--gold);
+    color: var(--black);
 
-  transform: translateY(-2px);
+    background: var(--gold);
 
-  box-shadow:
-    0 7px 18px rgba(0,0,0,.4);
+    border-color: var(--gold);
+
+    transform: translateY(-2px);
 }
 /* =========================================================
    CARD CONTAINER
@@ -2227,17 +2228,39 @@ footer p {
 
 .artist-front-info {
   flex: 1;
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
+
   padding: 15px 18px;
+}
+
+.artist-status {
+  color: var(--gold);
+
+  font-size: .55rem;
+
+  font-weight: 900;
+
+  letter-spacing: 2.5px;
 }
 
 .artist-front-info h3 {
   margin: 7px 0 0;
+
   color: var(--white);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+
+  font-family:
+    Impact,
+    Haettenschweiler,
+    "Arial Narrow Bold",
+    sans-serif;
+
   font-size: 1.35rem;
+
   letter-spacing: 1.5px;
 }
 
@@ -2334,40 +2357,44 @@ footer p {
 
 .artist-socials {
   display: flex;
+
   flex-wrap: wrap;
+
   justify-content: center;
-  align-items: center;
+
   gap: 7px;
-  margin-top: 20px;
+
+  margin-top: 25px;
 }
 
-.artist-socials a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 88px;
-  padding: 8px 11px;
-  color: #fff;
-  background: linear-gradient(145deg, rgba(177,30,44,.18), rgba(5,5,5,.92));
-  border: 1px solid rgba(212,175,55,.55);
-  text-decoration: none;
-  text-transform: uppercase;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .55rem;
+.artist-socials button {
+  position: relative;
+
+  z-index: 10;
+
+  padding: 9px 11px;
+
+  border: 1px solid rgba(212,175,55,.35);
+
+  background: transparent;
+
+  color: var(--gold);
+
+  font-size: .52rem;
+
   font-weight: 900;
-  letter-spacing: 1.3px;
-  line-height: 1;
-  box-shadow: inset 0 0 12px rgba(177,30,44,.08);
-  transition: .2s ease;
+
+  letter-spacing: 1px;
+
+  cursor: pointer;
 }
 
-.artist-socials a:hover {
-  color: var(--black);
-  background: var(--gold);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-  box-shadow: 0 7px 18px rgba(0,0,0,.4);
+.artist-socials button:disabled {
+  opacity: .5;
+
+  cursor: default;
 }
+
 
 /* =========================================================
    LEARN MORE
@@ -2487,13 +2514,7 @@ footer p {
 }
 
 .artist-modal-image {
-  height: 340px;
-  min-height: 340px;
-  background-color: #050505;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  overflow: hidden;
+  height: 300px;
 
   display: flex;
 
@@ -2570,15 +2591,14 @@ footer p {
   margin-top: 28px;
 }
 
-.artist-modal-links a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.artist-modal-links button {
   padding: 11px 18px;
-  color: #fff;
-  background: linear-gradient(145deg, rgba(177,30,44,.18), rgba(5,5,5,.92));
+
+  background: transparent;
 
   border: 1px solid rgba(212,175,55,.4);
+
+  color: var(--gold);
 
   font-size: .55rem;
 
@@ -2650,6 +2670,34 @@ footer p {
     animation-duration: 20s;
   }
 
+  nav {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+
+    gap: 7px;
+
+    width: 100%;
+
+    margin: 8px 0 0;
+
+    padding: 0 12px;
+  }
+
+  nav a {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 8px 5px;
+
+    font-size: .57rem;
+
+    letter-spacing: .9px;
+
+    white-space: nowrap;
+  }
 
 
   /* HERO */
@@ -2918,6 +2966,11 @@ footer p {
     padding: 10px;
   }
 
+  .artist-status {
+    font-size: .43rem;
+
+    letter-spacing: 1.5px;
+  }
 
   .artist-front-info h3 {
     font-size: .82rem;
@@ -2947,6 +3000,11 @@ footer p {
     margin-top: 15px;
   }
 
+  .artist-socials button {
+    padding: 6px 5px;
+
+    font-size: .39rem;
+  }
 
   .learn-more-btn {
     margin-top: 14px;
@@ -3154,12 +3212,33 @@ footer p {
   }
 }
 
+@media (max-width: 768px) {
+
+    .artist-socials,
+    .artist-modal-links {
+        gap: 8px;
+    }
+
+    .artist-socials a,
+    .artist-modal-links a {
+        padding: 8px 12px;
+        font-size: .6rem;
+    }
+
+}
 /* =========================================================
    VERY SMALL PHONES
    ========================================================= */
 
 @media (max-width:390px) {
 
+  nav a {
+    min-height: 44px;
+
+    font-size: .51rem;
+
+    letter-spacing: .6px;
+  }
 
   .hero {
     padding-left: 9px;
@@ -3829,73 +3908,8 @@ body.modal-open {
   }
 }
 
-
-
-
-/* =========================================================
-   FINAL ARTIST INTERACTION + RESPONSIVE POLISH
-   ========================================================= */
-
-.artist-card-front,
-.artist-card-back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+/* Hide desktop logo */
+.nav-inner > .nav-logo {
+  display: none !important;
 }
 
-.artist-card-back {
-  z-index: 2;
-}
-
-.artist-card-back .learn-more-btn,
-.artist-card-back .artist-socials,
-.artist-card-back .artist-socials a {
-  position: relative;
-  z-index: 50;
-  pointer-events: auto;
-}
-
-.artist-card-back .learn-more-btn {
-  cursor: pointer;
-}
-
-.artist-modal-links a:hover {
-  color: var(--black);
-  background: var(--gold);
-  border-color: var(--gold);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-  .artist-socials {
-    gap: 5px;
-    margin-top: 13px;
-  }
-
-  .artist-socials a {
-    min-width: 0;
-    padding: 7px 8px;
-    font-size: .46rem;
-    letter-spacing: .9px;
-  }
-
-  .artist-modal-image {
-    height: 260px;
-    min-height: 260px;
-  }
-
-  .artist-modal-links {
-    gap: 7px;
-  }
-
-  .artist-modal-links a {
-    padding: 9px 12px;
-    font-size: .5rem;
-  }
-}
-
-@media (max-width: 390px) {
-  .artist-modal-image {
-    height: 230px;
-    min-height: 230px;
-  }
-}
