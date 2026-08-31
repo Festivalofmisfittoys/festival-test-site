@@ -605,7 +605,7 @@ document.addEventListener(
                                 `url("${data.image}")`;
 
                             modalImage.style.backgroundSize =
-                                "cover";
+                                "contain";
 
                             modalImage.style.backgroundPosition =
                                 "center";
