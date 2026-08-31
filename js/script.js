@@ -435,13 +435,20 @@ document.addEventListener(
                 "[data-close-modal]"
             );
 
+        const learnMoreButtons =
+            document.querySelectorAll(
+                ".learn-more-btn"
+            );
+
 
         /* =====================================================
            REVEAL
            ===================================================== */
 
         if (lineupIsRevealed()) {
+
             revealArtists();
+
         }
 
 
@@ -455,20 +462,14 @@ document.addEventListener(
                 "click",
                 function (event) {
 
-                    /*
-                     * Do NOT flip the card when clicking
-                     * Learn More or a social link.
-                     */
-
                     if (
                         event.target.closest(
                             ".learn-more-btn"
-                        ) ||
-                        event.target.closest(
-                            ".artist-socials a"
                         )
                     ) {
+
                         return;
+
                     }
 
 
@@ -523,162 +524,127 @@ document.addEventListener(
 
         /* =====================================================
            LEARN MORE
-           
-           EVENT DELEGATION
-           
-           IMPORTANT:
-           The Learn More buttons are populated by
-           revealArtists(), so we listen at the document level.
            ===================================================== */
 
-        document.addEventListener(
-            "click",
-            function (event) {
+        learnMoreButtons.forEach(
+            function (button) {
 
-                const button =
-                    event.target.closest(
-                        ".learn-more-btn"
-                    );
+                button.addEventListener(
+                    "click",
+                    function (event) {
 
-                if (!button) {
-                    return;
-                }
-
-                event.preventDefault();
-                event.stopPropagation();
+                        event.stopPropagation();
 
 
-                if (!modal) {
-                    return;
-                }
+                        if (!modal) return;
 
 
-                const artistNumber =
-                    button.dataset.artist || "";
+                        const artistNumber =
+                            button.dataset.artist || "";
 
 
-                const data =
-                    bandData.find(
-                        band =>
-                            band.id ===
-                            artistNumber
-                    );
+                        const data =
+                            bandData.find(
+                                band =>
+                                    band.id ===
+                                    artistNumber
+                            );
 
 
-                if (!data) {
-                    return;
-                }
+                        if (
+                            !data ||
+                            !lineupIsRevealed()
+                        ) {
+
+                            return;
+
+                        }
 
 
-                if (!lineupIsRevealed()) {
-                    return;
-                }
+                        /* Modal content */
+
+                        if (modalKicker) {
+
+                            modalKicker.textContent =
+                                "FESTIVAL ARTIST";
+
+                        }
 
 
-                /* =================================================
-                   MODAL CONTENT
-                   ================================================= */
+                        if (modalTitle) {
 
-                if (modalKicker) {
+                            modalTitle.textContent =
+                                data.name;
 
-                    modalKicker.textContent =
-                        "FESTIVAL ARTIST";
-
-                }
+                        }
 
 
-                if (modalTitle) {
+                        if (modalBio) {
 
-                    modalTitle.textContent =
-                        data.name;
+                            modalBio.textContent =
+                                data.bio;
 
-                }
-
-
-                if (modalBio) {
-
-                    modalBio.textContent =
-                        data.bio;
-
-                }
+                        }
 
 
-                /* =================================================
-                   SOCIAL LINKS
-                   ================================================= */
+                        if (modalLinks) {
 
-                if (modalLinks) {
+                            modalLinks.innerHTML =
+                                buildSocialLinks(data);
 
-                    modalLinks.innerHTML =
-                        buildSocialLinks(data);
-
-                }
+                        }
 
 
-                /* =================================================
-                   ARTIST IMAGE
-                   ================================================= */
+                        if (modalImage) {
 
-                if (modalImage) {
+                            modalImage.classList.remove(
+                                "mystery-image"
+                            );
 
-                    modalImage.classList.remove(
-                        "mystery-image"
-                    );
+                            modalImage.style.backgroundImage =
+                                `url("${data.image}")`;
 
+                            modalImage.style.backgroundSize =
+                                "cover";
 
-                    modalImage.style.backgroundImage =
-                        `url("${data.image}")`;
-
-
-                    modalImage.style.backgroundSize =
-                        "contain";
+                            modalImage.style.backgroundPosition =
+                                "center";
 
 
-                    modalImage.style.backgroundPosition =
-                        "center";
+                            const mysterySpan =
+                                modalImage.querySelector(
+                                    "span"
+                                );
+
+                            if (mysterySpan) {
+
+                                mysterySpan.style.display =
+                                    "none";
+
+                            }
+
+                        }
 
 
-                    modalImage.style.backgroundRepeat =
-                        "no-repeat";
+                        /* Open modal */
 
-
-                    const mysterySpan =
-                        modalImage.querySelector(
-                            "span"
+                        modal.classList.add(
+                            "is-open"
                         );
 
+                        modal.setAttribute(
+                            "aria-hidden",
+                            "false"
+                        );
 
-                    if (mysterySpan) {
-
-                        mysterySpan.style.display =
-                            "none";
+                        document.body.classList.add(
+                            "modal-open"
+                        );
 
                     }
-
-                }
-
-
-                /* =================================================
-                   OPEN MODAL
-                   ================================================= */
-
-                modal.classList.add(
-                    "is-open"
                 );
 
-
-                modal.setAttribute(
-                    "aria-hidden",
-                    "false"
-                );
-
-
-                document.body.classList.add(
-                    "modal-open"
-                );
-
-            },
-            true
+            }
         );
 
 
@@ -688,21 +654,17 @@ document.addEventListener(
 
         function closeModal() {
 
-            if (!modal) {
-                return;
-            }
+            if (!modal) return;
 
 
             modal.classList.remove(
                 "is-open"
             );
 
-
             modal.setAttribute(
                 "aria-hidden",
                 "true"
             );
-
 
             document.body.classList.remove(
                 "modal-open"
@@ -723,10 +685,6 @@ document.addEventListener(
         );
 
 
-        /* =====================================================
-           ESCAPE KEY
-           ===================================================== */
-
         document.addEventListener(
             "keydown",
             function (event) {
@@ -744,6 +702,7 @@ document.addEventListener(
 
     }
 );
+
 
 /* =========================================================
    HAMBURGER NAVIGATION
