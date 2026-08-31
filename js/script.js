@@ -435,12 +435,7 @@ document.addEventListener(
                 "[data-close-modal]"
             );
 
-        const learnMoreButtons =
-            document.querySelectorAll(
-                ".learn-more-btn"
-            );
-
-
+   
         /* =====================================================
            REVEAL
            ===================================================== */
